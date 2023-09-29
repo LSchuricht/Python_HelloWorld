@@ -1,0 +1,23 @@
+name: run python
+
+on:
+    push:
+        branches:
+            - main
+
+permissions:
+    contents: write
+
+jobs:
+    run-python:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: build python env
+              uses: actions/setup-python@v4
+              with: 
+                python-version: 3.9
+            - name: install dependencies
+              run: pip install -r python/requirements.txt
+            - name: run main.py
+              run: python main.py
