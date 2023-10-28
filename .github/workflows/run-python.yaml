@@ -1,28 +1,42 @@
-name: run python
+name: Python Code Runner
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  run-python:
+  run_python:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: ls
-        run: |
-          ls -la
-          echo "$GITHUB_CONTEXT"
-      - name: build python env
-        uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.9 # Specify the desired Python version
+
+      - name: Determine folder from JSON file
+        id: get_folder
+        run: |
+          folder=$(jq -r .folder .github/execute-python.json)
+          echo "::set-output name=folder::$folder"
+        shell: bash
+
+      - name: Set folder
+        run: |
+          folder="${{ steps.get_folder.outputs.folder }}"
+          cd $folder
+      - name: build python env
+        run: python -m venv venv
+
       - name: install dependencies
-        run: pip install -r python/requirements.txt
-      - name: run python/main.py
-        run: python python/main.py
+        run: pip install -r requirements.txt
+
+      - name: run main.py in $folder
+        run: python main.py
