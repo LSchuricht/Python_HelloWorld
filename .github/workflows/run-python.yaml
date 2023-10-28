@@ -1,24 +1,28 @@
 name: run python
 
 on:
-    #push:
-    #    branches:
-    #        - main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    run-python:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - name: build python env
-              uses: actions/setup-python@v4
-              with: 
-                python-version: 3.9
-            - name: install dependencies
-              run: pip install -r python/requirements.txt
-            - name: run python/main.py
-              run: python python/main.py
+  run-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ls
+        run: |
+          ls -la
+          echo "$GITHUB_CONTEXT"
+      - name: build python env
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: install dependencies
+        run: pip install -r python/requirements.txt
+      - name: run python/main.py
+        run: python python/main.py
