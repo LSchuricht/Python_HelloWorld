@@ -8,11 +8,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 
-l1 = [2, 4, 3]
-l2 = [5, 6, 4]
-output = [7, 0, 8]
-
-
 class add_two_numbers:
     def __init__(self, l1, l2) -> None:
         self.l1 = l1
@@ -46,6 +41,7 @@ class add_two_numbers:
         return self.l3
 
 
-sum = add_two_numbers([2, 4, 3], [5, 6, 4])
-sum.foo()
-print(sum.print_list())
+if __name__ == "__main__":
+    sum = add_two_numbers([2, 4, 3], [5, 6, 4])
+    sum.foo()
+    print(sum.print_list())
