@@ -36,4 +36,4 @@ class test_basic(TestCase):
     def test_case_7(self):
         mycase = add_two_numbers([2], [3, 9, 8, 5, 2, 3, 0, 5])
         mycase.foo()
-        self.assertEqual(mycase.l3, ["8", "0", "3", "2", "5", "8", "9", "2"])
+        self.assertEqual(mycase.l3, ["7", "0", "3", "2", "5", "8", "9", "3"])
