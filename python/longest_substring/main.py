@@ -43,7 +43,6 @@ class longest_substring:
 
 
 def main():
-    logging.info("lorem")
     s = "abcabcd"
     foo = longest_substring()
     foo.set(s)
