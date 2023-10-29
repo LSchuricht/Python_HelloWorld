@@ -1,0 +1,38 @@
+name: Python Code Runner
+
+on:
+  push:
+    paths:
+      - "testcases.py"
+
+  pull_request:
+    paths:
+      - "testcases.py"
+
+permissions:
+  contents: write
+
+jobs:
+  run_python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9 # Specify the desired Python version
+
+      - name: write env
+        run: |
+          WORKDIR=$(jq -r .folder .github/workdir.json)
+          echo "WORKDIR=$(jq -r .folder .github/workdir.json)" >> $GITHUB_ENV
+
+      - name: Execute Python code
+        run: |
+          cd ${{ env.WORKDIR }}
+          python -m venv venv
+          pip install -r requirements.txt
+          python -m unittest testcases.py
