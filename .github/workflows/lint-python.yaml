@@ -13,4 +13,4 @@ jobs:
       - name: linter
         uses: psf/black@23.3.0
         with:
-          options: "--diff --color"
+          options: "--check --diff --color"
