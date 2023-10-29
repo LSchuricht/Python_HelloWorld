@@ -1,4 +1,4 @@
-name: Python Code Runner
+name: Python Code Tester
 
 on:
   push:
