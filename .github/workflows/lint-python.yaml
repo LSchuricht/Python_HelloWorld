@@ -1,0 +1,16 @@
+name: Python Code Lint
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: linter
+        uses: psf/black@23.3.0
+        with:
+          options: "--check --diff --color"
