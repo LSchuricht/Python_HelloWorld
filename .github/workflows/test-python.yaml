@@ -3,7 +3,7 @@ name: Python Code Runner
 on:
   push:
     paths:
-      - "testcases.py"
+      - "**/testcases.py"
 
   pull_request:
     paths:
