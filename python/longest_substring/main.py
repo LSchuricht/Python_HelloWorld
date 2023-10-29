@@ -1,6 +1,6 @@
 import logging
 
-logging.basicConfig(level="INFO")
+# logging.basicConfig(level="INFO")
 
 
 class longest_substring:
