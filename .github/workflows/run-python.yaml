@@ -2,8 +2,6 @@ name: Python Code Runner
 
 on:
   push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -21,22 +19,14 @@ jobs:
         with:
           python-version: 3.9 # Specify the desired Python version
 
-      - name: Determine folder from JSON file
-        id: get_folder
+      - name: write env
         run: |
-          folder=$(jq -r .folder .github/execute-python.json)
-          echo "::set-output name=folder::$folder"
-        shell: bash
+          WORKDIR=$(jq -r .folder .github/workdir.json)
+          echo "WORKDIR=$(jq -r .folder .github/workdir.json)" >> $GITHUB_ENV
 
-      - name: Set folder
+      - name: Execute Python code
         run: |
-          folder="${{ steps.get_folder.outputs.folder }}"
-          cd $folder
-      - name: build python env
-        run: python -m venv venv
-
-      - name: install dependencies
-        run: pip install -r requirements.txt
-
-      - name: run main.py in $folder
-        run: python main.py
+          cd ${{ env.WORKDIR }}
+          python -m venv venv
+          pip install -r requirements.txt
+          python main.py
