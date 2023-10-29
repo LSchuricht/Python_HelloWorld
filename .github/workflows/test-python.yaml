@@ -30,7 +30,7 @@ jobs:
           WORKDIR=$(jq -r .folder .github/workdir.json)
           echo "WORKDIR=$(jq -r .folder .github/workdir.json)" >> $GITHUB_ENV
 
-      - name: Execute Python code
+      - name: Run Python unittests
         run: |
           cd ${{ env.WORKDIR }}
           python -m venv venv
