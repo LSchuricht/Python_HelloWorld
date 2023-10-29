@@ -39,7 +39,7 @@ class test_basic(TestCase):
         self.assertEqual(mycase.len_longest_substring, 0)
 
     def test_case_6(self):
-        s = "abcabcdadcabcdefabc"
+        s = "abcabcdadcabcdefab"
         mycase = foo()
         mycase.set(s)
         mycase.find_substring()
